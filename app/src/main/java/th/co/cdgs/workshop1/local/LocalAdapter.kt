@@ -38,7 +38,7 @@ class LocalAdapter : /* two add implement abstract recycleview adapter and three
         //after init component item
         val data = dataList[position]
         holder.txtFullName.text = data.firstName.plus(" ").plus(data.lastName)
-        holder.txtAge.text = data.age.toString()
+        holder.txtAge.text = data.birthDay.toString()
         holder.txtGender.text = data.gender
 
         //after create insert person go to entity add Serializable

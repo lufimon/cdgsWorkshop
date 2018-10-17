@@ -8,6 +8,7 @@ import android.widget.RadioButton
 import android.widget.TextView
 import th.co.cdgs.workshop1.R
 import th.co.cdgs.workshop1.Utils
+import th.co.cdgs.workshop1.Utils.Companion.datePickerDialog
 import th.co.cdgs.workshop1.local.data.AppDatabase
 import th.co.cdgs.workshop1.local.data.Person
 
@@ -52,6 +53,9 @@ class LocalAddActivity : AppCompatActivity() {
         edtFirstName = findViewById(R.id.edt_first_name)
         edtLastName = findViewById(R.id.edt_last_name)
         edtAge = findViewById(R.id.edt_age)
+        edtAge.setOnClickListener {
+            datePickerDialog(this@LocalAddActivity, edtAge, edtAge.text.toString())
+        }
 
         //when select rd male
         rdMale = findViewById(R.id.rd_male)
@@ -72,7 +76,7 @@ class LocalAddActivity : AppCompatActivity() {
                 Person().apply {
                     firstName = edtFirstName.text.toString()
                     lastName = edtLastName.text.toString()
-                    age = edtAge.text.toString().toInt()
+                    birthDay = edtAge.text.toString()
                     gender = this@LocalAddActivity.gender
                 }.run {
                     AppDatabase.getAppDatabase(this@LocalAddActivity).personDao().insertPerson(this)
@@ -86,16 +90,18 @@ class LocalAddActivity : AppCompatActivity() {
          * update section
          */
         val intent = intent.getSerializableExtra("DATA")
-        if(intent != null) {
+        if (intent != null) {
             val person = intent as Person
             this@LocalAddActivity.id = person.id
             edtFirstName.text = person.firstName
             edtLastName.text = person.lastName
-            edtAge.text = person.age.toString()
+            edtAge.text = person.birthDay
             if (person.gender == "Male") {
                 rdMale.isChecked = true
+                this@LocalAddActivity.gender = "Male"
             } else {
                 rdFemale.isChecked = true
+                this@LocalAddActivity.gender = "Female"
             }
         }
 
@@ -107,7 +113,7 @@ class LocalAddActivity : AppCompatActivity() {
                     id = this@LocalAddActivity.id
                     firstName = edtFirstName.text.toString()
                     lastName = edtLastName.text.toString()
-                    age = edtAge.text.toString().toInt()
+                    birthDay = edtAge.text.toString()
                     gender = this@LocalAddActivity.gender
                 }.run {
                     AppDatabase.getAppDatabase(this@LocalAddActivity).personDao().updatePerson(this)

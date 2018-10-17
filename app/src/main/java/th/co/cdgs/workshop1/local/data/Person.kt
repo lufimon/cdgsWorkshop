@@ -11,6 +11,6 @@ data class Person(
     @PrimaryKey(autoGenerate = true) var id: Int? = null,
     @ColumnInfo(name = "first_name") var firstName: String? = null,
     @ColumnInfo(name = "last_name") var lastName: String? = null,
-    @ColumnInfo(name = "age") var age: Int? = null,
+    @ColumnInfo(name = "birthDay") var birthDay: String? = null,
     @ColumnInfo(name = "gender") var gender: String? = null
 ): /*add when update section*/Serializable
