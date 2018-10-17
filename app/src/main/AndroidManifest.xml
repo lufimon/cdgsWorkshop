@@ -26,6 +26,8 @@
         </activity>
         <activity android:name=".local.LocalAddActivity">
         </activity>
+        <activity android:name=".remote.RemoteAddActivity">
+        </activity>
     </application>
 
 </manifest>
