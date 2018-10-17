@@ -14,9 +14,9 @@ import th.co.cdgs.workshop1.local.data.Person
 class RemoteAdapter : /* two add implement abstract recycleview adapter and three implement funtion */
     RecyclerView.Adapter<RemoteAdapter.ViewHolder>() {
 
-    private lateinit var dataList: List<Person>
+    private lateinit var dataList: MutableMap<String, Person>
 
-    fun setDataList(dataList: List<Person>) {
+    fun setDataList(dataList: MutableMap<String, Person>) {
         this.dataList = dataList
     }
 
@@ -36,7 +36,7 @@ class RemoteAdapter : /* two add implement abstract recycleview adapter and thre
     //define value in item
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         //after init component item
-        val data = dataList[position]
+        val data = dataList.values.toList()[position]
         holder.txtFullName.text = data.firstName.plus(" ").plus(data.lastName)
         holder.txtAge.text = data.birthDay.toString()
         holder.txtGender.text = data.gender
@@ -45,6 +45,7 @@ class RemoteAdapter : /* two add implement abstract recycleview adapter and thre
         holder.conLayoutItem.setOnClickListener {
             val intent = Intent(holder.itemView.context, RemoteAddActivity::class.java)
             intent.putExtra("TITLE", "Update Person")
+            intent.putExtra("KEY", dataList.keys.toList()[position])
             intent.putExtra("DATA", data)
             holder.itemView.context.startActivity(intent)
         }
