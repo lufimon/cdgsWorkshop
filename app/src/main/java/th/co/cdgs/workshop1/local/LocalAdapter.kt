@@ -1,5 +1,7 @@
 package th.co.cdgs.workshop1.local
 
+import android.content.Intent
+import android.support.constraint.ConstraintLayout
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -38,6 +40,13 @@ class LocalAdapter : /* two add implement abstract recycleview adapter and three
         holder.txtFullName.text = data.firstName.plus(" ").plus(data.lastName)
         holder.txtAge.text = data.age.toString()
         holder.txtGender.text = data.gender
+
+        //after create insert person go to entity add Serializable
+        holder.conLayoutItem.setOnClickListener {
+            val intent = Intent(holder.itemView.context, LocalAddActivity::class.java)
+            intent.putExtra("DATA", data)
+            holder.itemView.context.startActivity(intent)
+        }
     }
 
     //first create from create view holder
@@ -46,5 +55,8 @@ class LocalAdapter : /* two add implement abstract recycleview adapter and three
         val txtFullName = view.findViewById<TextView>(R.id.txt_fullname)
         val txtAge = view.findViewById<TextView>(R.id.txt_age)
         val txtGender = view.findViewById<TextView>(R.id.txt_gender)
+
+        //after create insert person
+        val conLayoutItem = view.findViewById<ConstraintLayout>(R.id.con_layout_item)
     }
 }

@@ -22,6 +22,10 @@ class LocalAddActivity : AppCompatActivity() {
     lateinit var btnSaveAdd: Button
     var gender: String? = null
 
+    //after add btn update layout activity_local_add
+    var id: Int? = null
+    lateinit var btnUpdate: Button
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -69,6 +73,38 @@ class LocalAddActivity : AppCompatActivity() {
                     gender = this@LocalAddActivity.gender
                 }.run {
                     AppDatabase.getAppDatabase(this@LocalAddActivity).personDao().insertPerson(this)
+                }
+            }, {
+                finish()
+            }).execute()
+        }
+
+        /**
+         * update section
+         */
+        val intent = intent.getSerializableExtra("DATA") as Person
+        this@LocalAddActivity.id = intent.id
+        edtFirstName.text = intent.firstName
+        edtLastName.text = intent.lastName
+        edtAge.text = intent.age.toString()
+        if(intent.gender == "Male"){
+            rdMale.isChecked = true
+        } else {
+            rdFemale.isChecked = true
+        }
+
+        btnUpdate = findViewById(R.id.btn_update)
+        //when press button update
+        btnUpdate.setOnClickListener {
+            Utils.Companion.DoAsync({
+                Person().apply {
+                    id = this@LocalAddActivity.id
+                    firstName = edtFirstName.text.toString()
+                    lastName = edtLastName.text.toString()
+                    age = edtAge.text.toString().toInt()
+                    gender = this@LocalAddActivity.gender
+                }.run {
+                    AppDatabase.getAppDatabase(this@LocalAddActivity).personDao().updatePerson(this)
                 }
             }, {
                 finish()
