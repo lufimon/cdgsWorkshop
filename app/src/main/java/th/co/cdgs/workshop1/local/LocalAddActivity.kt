@@ -26,6 +26,9 @@ class LocalAddActivity : AppCompatActivity() {
     var id: Int? = null
     lateinit var btnUpdate: Button
 
+    //after add btn delete layout activity_local_add
+    lateinit var btnDelete: Button
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -106,6 +109,19 @@ class LocalAddActivity : AppCompatActivity() {
                 }.run {
                     AppDatabase.getAppDatabase(this@LocalAddActivity).personDao().updatePerson(this)
                 }
+            }, {
+                finish()
+            }).execute()
+        }
+
+        /**
+         * delete section
+         */
+        btnDelete = findViewById(R.id.btn_delete)
+        //when press button delete
+        btnDelete.setOnClickListener {
+            Utils.Companion.DoAsync({
+                AppDatabase.getAppDatabase(this@LocalAddActivity).personDao().deleteById(this@LocalAddActivity.id!!)
             }, {
                 finish()
             }).execute()

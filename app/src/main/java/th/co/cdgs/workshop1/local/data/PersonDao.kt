@@ -1,6 +1,7 @@
 package th.co.cdgs.workshop1.local.data
 
 import android.arch.persistence.room.*
+
 //2
 @Dao
 interface PersonDao {
@@ -19,4 +20,8 @@ interface PersonDao {
 
     @Query("SELECT * FROM person WHERE person.id = :id")
     fun getPersonById(id: Int): Person
+
+    //add delete section
+    @Query("DELETE FROM person WHERE person.id = :id")
+    fun deleteById(id: Int)
 }
