@@ -44,6 +44,7 @@ class LocalAdapter : /* two add implement abstract recycleview adapter and three
         //after create insert person go to entity add Serializable
         holder.conLayoutItem.setOnClickListener {
             val intent = Intent(holder.itemView.context, LocalAddActivity::class.java)
+            intent.putExtra("TITLE", "Update Person")
             intent.putExtra("DATA", data)
             holder.itemView.context.startActivity(intent)
         }

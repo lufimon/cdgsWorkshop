@@ -1,6 +1,7 @@
 package th.co.cdgs.workshop1.local
 
 import android.os.Bundle
+import android.service.quicksettings.Tile
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import android.widget.Button
@@ -34,7 +35,6 @@ class LocalAddActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         setContentView(R.layout.activity_local_add)
-        title = "Add Person"
         //after create layout activity_local_add
         this.init()
     }
@@ -89,9 +89,9 @@ class LocalAddActivity : AppCompatActivity() {
         /**
          * update section
          */
-        val intent = intent.getSerializableExtra("DATA")
-        if (intent != null) {
-            val person = intent as Person
+        val data = intent.getSerializableExtra("DATA")
+        if (data != null) {
+            val person = data as Person
             this@LocalAddActivity.id = person.id
             edtFirstName.text = person.firstName
             edtLastName.text = person.lastName
@@ -104,6 +104,9 @@ class LocalAddActivity : AppCompatActivity() {
                 this@LocalAddActivity.gender = "Female"
             }
         }
+
+        val title = intent.getStringExtra("TITLE")
+        this@LocalAddActivity.title = title ?: "Add Person"
 
         btnUpdate = findViewById(R.id.btn_update)
         //when press button update
