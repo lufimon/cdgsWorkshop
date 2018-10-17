@@ -140,7 +140,25 @@ class RemoteAddActivity : AppCompatActivity() {
         btnUpdate = findViewById(R.id.btn_update)
         //when press button update
         btnUpdate.setOnClickListener {
-            //todo call retrofit when update
+            Person().apply {
+                firstName = edtFirstName.text.toString()
+                lastName = edtLastName.text.toString()
+                birthDay = edtAge.text.toString()
+                gender = this@RemoteAddActivity.gender
+            }.run {
+                //todo second create when create retrofit connect
+                retrofitBuilder().updatePerson(this@RemoteAddActivity.key!!, this)
+                    .enqueue(object : Callback<ResponseBody> {
+                        override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                            Log.i(TAG, t.message)
+                        }
+
+                        override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                            Log.i(TAG, response.message())
+                            finish()
+                        }
+                    })
+            }
         }
 
         /**
@@ -149,7 +167,18 @@ class RemoteAddActivity : AppCompatActivity() {
         btnDelete = findViewById(R.id.btn_delete)
         //when press button delete
         btnDelete.setOnClickListener {
-            //todo call retrofit when delete
+            //todo third create when create retrofit connect
+            retrofitBuilder().deletePerson(this@RemoteAddActivity.key!!)
+                .enqueue(object : Callback<ResponseBody> {
+                    override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                        Log.i(TAG, t.message)
+                    }
+
+                    override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                        Log.i(TAG, response.message())
+                        finish()
+                    }
+                })
         }
     }
 }

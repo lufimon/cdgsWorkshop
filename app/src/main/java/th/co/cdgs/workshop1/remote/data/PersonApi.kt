@@ -15,4 +15,7 @@ interface PersonApi {
 
     @PUT("{key}.json")
     fun updatePerson(@Path("key") key: String, @Body person: Person): Call<ResponseBody>
+
+    @DELETE("{key}.json")
+    fun deletePerson(@Path("key") key: String): Call<ResponseBody>
 }
