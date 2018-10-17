@@ -3,7 +3,7 @@ package th.co.cdgs.workshop1.local.data
 import android.arch.persistence.room.ColumnInfo
 import android.arch.persistence.room.Entity
 import android.arch.persistence.room.PrimaryKey
-
+//1
 @Entity(tableName = "person")
 data class Person(
     @PrimaryKey(autoGenerate = true) var id: Int? = null,

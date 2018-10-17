@@ -1,7 +1,7 @@
 package th.co.cdgs.workshop1.local.data
 
 import android.arch.persistence.room.*
-
+//2
 @Dao
 interface PersonDao {
 
