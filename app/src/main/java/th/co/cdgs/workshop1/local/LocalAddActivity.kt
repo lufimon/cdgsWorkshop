@@ -85,15 +85,18 @@ class LocalAddActivity : AppCompatActivity() {
         /**
          * update section
          */
-        val intent = intent.getSerializableExtra("DATA") as Person
-        this@LocalAddActivity.id = intent.id
-        edtFirstName.text = intent.firstName
-        edtLastName.text = intent.lastName
-        edtAge.text = intent.age.toString()
-        if(intent.gender == "Male"){
-            rdMale.isChecked = true
-        } else {
-            rdFemale.isChecked = true
+        val intent = intent.getSerializableExtra("DATA")
+        if(intent != null) {
+            val person = intent as Person
+            this@LocalAddActivity.id = person.id
+            edtFirstName.text = person.firstName
+            edtLastName.text = person.lastName
+            edtAge.text = person.age.toString()
+            if (person.gender == "Male") {
+                rdMale.isChecked = true
+            } else {
+                rdFemale.isChecked = true
+            }
         }
 
         btnUpdate = findViewById(R.id.btn_update)
