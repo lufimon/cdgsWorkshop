@@ -16,7 +16,6 @@ class LocalActivity : AppCompatActivity() {
 
     //after create button in layout activity_local
     lateinit var btnAddPerson: Button
-    lateinit var btnSearchPerson: Button
 
     //define after create input from success
     lateinit var localAdapter: LocalAdapter
@@ -47,11 +46,6 @@ class LocalActivity : AppCompatActivity() {
         btnAddPerson = findViewById(R.id.btn_add_person)
         btnAddPerson.setOnClickListener {
             startActivity(Intent(this@LocalActivity, LocalAddActivity::class.java))
-        }
-
-        btnSearchPerson = findViewById(R.id.btn_search_person)
-        btnSearchPerson.setOnClickListener {
-
         }
 
         //define after create input from success
