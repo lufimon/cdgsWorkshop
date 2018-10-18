@@ -49,7 +49,13 @@ class Utils {
 
             val dpd =
                 DatePickerDialog(context, DatePickerDialog.OnDateSetListener { _, y, m, d ->
-                    txtDate.text = y.toString().plus("-").plus(m + 1).plus("-").plus(d.toString())
+                    txtDate.text = y.toString().plus("-").plus(m + 1).plus("-").plus(d.toString().run {
+                        if (this.length == 1) {
+                            "0".plus(this)
+                        } else {
+                            this
+                        }
+                    })
                 }, years, month, day)
             dpd.show()
         }
