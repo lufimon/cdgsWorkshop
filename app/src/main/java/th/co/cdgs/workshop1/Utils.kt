@@ -41,15 +41,15 @@ class Utils {
                 month = c.get(Calendar.MONTH)
                 day = c.get(Calendar.DAY_OF_MONTH)
             } else {
-                val c = date!!.split("/")
-                years = c[2].toInt()
+                val c = date!!.split("-")
+                years = c[0].toInt()
                 month = c[1].toInt() - 1
-                day = c[0].toInt()
+                day = c[2].toInt()
             }
 
             val dpd =
                 DatePickerDialog(context, DatePickerDialog.OnDateSetListener { _, y, m, d ->
-                    txtDate.text = d.toString().plus("/").plus(m + 1).plus("/").plus(y.toString())
+                    txtDate.text = y.toString().plus("-").plus(m + 1).plus("-").plus(d.toString())
                 }, years, month, day)
             dpd.show()
         }

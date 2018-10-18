@@ -39,7 +39,11 @@ class RemoteAdapter : /* two add implement abstract recycleview adapter and thre
         val data = dataList.values.toList()[position]
         holder.txtFullName.text = data.firstName.plus(" ").plus(data.lastName)
         holder.txtAge.text = data.birthDay.toString()
-        holder.txtGender.text = data.gender
+        holder.txtGender.text = if(data.gender == "M"){
+            "Male"
+        } else {
+            "Female"
+        }
 
         //after create insert person go to entity add Serializable
         holder.conLayoutItem.setOnClickListener {

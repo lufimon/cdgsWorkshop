@@ -60,13 +60,13 @@ class LocalAddActivity : AppCompatActivity() {
         //when select rd male
         rdMale = findViewById(R.id.rd_male)
         rdMale.setOnClickListener {
-            this@LocalAddActivity.gender = "Male"
+            this@LocalAddActivity.gender = "M"
         }
 
         //when select rd female
         rdFemale = findViewById(R.id.rd_femele)
         rdFemale.setOnClickListener {
-            this@LocalAddActivity.gender = "Female"
+            this@LocalAddActivity.gender = "F"
         }
 
         btnSaveAdd = findViewById(R.id.btn_save_add)
@@ -96,12 +96,12 @@ class LocalAddActivity : AppCompatActivity() {
             edtFirstName.text = person.firstName
             edtLastName.text = person.lastName
             edtAge.text = person.birthDay
-            if (person.gender == "Male") {
+            if (person.gender == "M") {
                 rdMale.isChecked = true
-                this@LocalAddActivity.gender = "Male"
+                this@LocalAddActivity.gender = "M"
             } else {
                 rdFemale.isChecked = true
-                this@LocalAddActivity.gender = "Female"
+                this@LocalAddActivity.gender = "F"
             }
         }
 

@@ -80,13 +80,13 @@ class RemoteAddActivity : AppCompatActivity() {
         //when select rd male
         rdMale = findViewById(R.id.rd_male)
         rdMale.setOnClickListener {
-            this@RemoteAddActivity.gender = "Male"
+            this@RemoteAddActivity.gender = "M"
         }
 
         //when select rd female
         rdFemale = findViewById(R.id.rd_femele)
         rdFemale.setOnClickListener {
-            this@RemoteAddActivity.gender = "Female"
+            this@RemoteAddActivity.gender = "F"
         }
 
         btnSaveAdd = findViewById(R.id.btn_save_add)
@@ -122,12 +122,12 @@ class RemoteAddActivity : AppCompatActivity() {
             edtFirstName.text = person.firstName
             edtLastName.text = person.lastName
             edtAge.text = person.birthDay
-            if (person.gender == "Male") {
+            if (person.gender == "M") {
                 rdMale.isChecked = true
-                this@RemoteAddActivity.gender = "Male"
+                this@RemoteAddActivity.gender = "M"
             } else {
                 rdFemale.isChecked = true
-                this@RemoteAddActivity.gender = "Female"
+                this@RemoteAddActivity.gender = "F"
             }
         }
 
