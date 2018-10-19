@@ -8,7 +8,7 @@ import th.co.cdgs.workshop1.local.data.Person
 //1
 interface PersonApi {
     @GET(".json")
-    fun getPersonAll(): Call<MutableMap<String, Person>>
+    fun getPersonAll(): Call<Map<String, Person>>
 
     @POST(".json")
     fun insertPerson(@Body person: Person): Call<Unit>

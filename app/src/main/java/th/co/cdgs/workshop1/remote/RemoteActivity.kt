@@ -78,14 +78,14 @@ class RemoteActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        retrofitBuilder().getPersonAll().enqueue(object : Callback<MutableMap<String, Person>> {
-            override fun onFailure(call: Call<MutableMap<String, Person>>, t: Throwable) {
+        retrofitBuilder().getPersonAll().enqueue(object : Callback<Map<String, Person>> {
+            override fun onFailure(call: Call<Map<String, Person>>, t: Throwable) {
                 Log.e(TAG, t.message)
             }
 
             override fun onResponse(
-                call: Call<MutableMap<String, Person>>,
-                response: Response<MutableMap<String, Person>>
+                call: Call<Map<String, Person>>,
+                response: Response<Map<String, Person>>
             ) {
                 Log.i(TAG, response.message())
                 response.body().run {

@@ -14,9 +14,9 @@ import th.co.cdgs.workshop1.local.data.Person
 class RemoteAdapter : /* two add implement abstract recycleview adapter and three implement funtion */
     RecyclerView.Adapter<RemoteAdapter.ViewHolder>() {
 
-    private var dataList: MutableMap<String, Person>? = null
+    private var dataList: Map<String, Person>? = null
 
-    fun setDataList(dataList: MutableMap<String, Person>?) {
+    fun setDataList(dataList: Map<String, Person>?) {
         this.dataList = dataList
     }
 
