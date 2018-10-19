@@ -38,9 +38,6 @@ class RemoteActivity : AppCompatActivity() {
     //define after create adapter success
     lateinit var recyclerView: RecyclerView
 
-    //data list from remote
-    lateinit var dataList: MutableMap<String, Person>
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
