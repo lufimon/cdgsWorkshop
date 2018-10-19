@@ -39,7 +39,7 @@ class RemoteActivity : AppCompatActivity() {
     lateinit var recyclerView: RecyclerView
 
     //data list from remote
-    lateinit var dataList: LinkedHashMap<String, Person>
+    lateinit var dataList: MutableMap<String, Person>
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -78,21 +78,23 @@ class RemoteActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        retrofitBuilder().getPersonAll().enqueue(object : Callback<ResponseBody> {
-            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+        retrofitBuilder().getPersonAll().enqueue(object : Callback<MutableMap<String, Person>> {
+            override fun onFailure(call: Call<MutableMap<String, Person>>, t: Throwable) {
                 Log.e(TAG, t.message)
             }
 
-            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
-                //custom type from firebase
-                val type = object : TypeToken<LinkedHashMap<String, Person>>() {}.type
-                dataList = Gson().fromJson(response.body()?.string(), type)
-                dataList.run {
-                    remoteAdapter.setDataList(this.toMutableMap())
+            override fun onResponse(
+                call: Call<MutableMap<String, Person>>,
+                response: Response<MutableMap<String, Person>>
+            ) {
+                Log.i(TAG, response.message())
+                response.body().run {
+                    remoteAdapter.setDataList(this)
                     remoteAdapter.notifyDataSetChanged()
                     recyclerView.adapter = remoteAdapter
                 }
             }
+
         })
     }
 

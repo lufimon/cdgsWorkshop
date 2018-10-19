@@ -14,9 +14,9 @@ import th.co.cdgs.workshop1.local.data.Person
 class RemoteAdapter : /* two add implement abstract recycleview adapter and three implement funtion */
     RecyclerView.Adapter<RemoteAdapter.ViewHolder>() {
 
-    private lateinit var dataList: MutableMap<String, Person>
+    private var dataList: MutableMap<String, Person>? = null
 
-    fun setDataList(dataList: MutableMap<String, Person>) {
+    fun setDataList(dataList: MutableMap<String, Person>?) {
         this.dataList = dataList
     }
 
@@ -30,16 +30,16 @@ class RemoteAdapter : /* two add implement abstract recycleview adapter and thre
     //define size list item
     override fun getItemCount(): Int {
         //return size data list for loop create item
-        return dataList.size
+        return dataList?.size ?: 0
     }
 
     //define value in item
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         //after init component item
-        val data = dataList.values.toList()[position]
-        holder.txtFullName.text = data.firstName.plus(" ").plus(data.lastName)
-        holder.txtAge.text = data.birthDay.toString()
-        holder.txtGender.text = if(data.gender == "M"){
+        val data = dataList?.values?.toList()?.get(position)
+        holder.txtFullName.text = data?.firstName.plus(" ").plus(data?.lastName)
+        holder.txtAge.text = data?.birthDay.toString()
+        holder.txtGender.text = if (data?.gender == "M") {
             "Male"
         } else {
             "Female"
@@ -49,7 +49,7 @@ class RemoteAdapter : /* two add implement abstract recycleview adapter and thre
         holder.conLayoutItem.setOnClickListener {
             val intent = Intent(holder.itemView.context, RemoteAddActivity::class.java)
             intent.putExtra("TITLE", "Update Person")
-            intent.putExtra("KEY", dataList.keys.toList()[position])
+            intent.putExtra("KEY", dataList?.keys?.toList()?.get(position))
             intent.putExtra("DATA", data)
             holder.itemView.context.startActivity(intent)
         }

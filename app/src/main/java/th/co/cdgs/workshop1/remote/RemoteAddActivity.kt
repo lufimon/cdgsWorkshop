@@ -99,12 +99,12 @@ class RemoteAddActivity : AppCompatActivity() {
                 gender = this@RemoteAddActivity.gender
             }.run {
                 //todo first create when create retrofit connect
-                retrofitBuilder().insertPerson(this).enqueue(object : Callback<ResponseBody> {
-                    override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                retrofitBuilder().insertPerson(this).enqueue(object : Callback<Unit> {
+                    override fun onFailure(call: Call<Unit>, t: Throwable) {
                         Log.i(TAG, t.message)
                     }
 
-                    override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                    override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
                         Log.i(TAG, response.message())
                         finish()
                     }
@@ -148,12 +148,12 @@ class RemoteAddActivity : AppCompatActivity() {
             }.run {
                 //todo second create when create retrofit connect
                 retrofitBuilder().updatePerson(this@RemoteAddActivity.key!!, this)
-                    .enqueue(object : Callback<ResponseBody> {
-                        override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                    .enqueue(object : Callback<Unit> {
+                        override fun onFailure(call: Call<Unit>, t: Throwable) {
                             Log.i(TAG, t.message)
                         }
 
-                        override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                        override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
                             Log.i(TAG, response.message())
                             finish()
                         }
@@ -169,12 +169,12 @@ class RemoteAddActivity : AppCompatActivity() {
         btnDelete.setOnClickListener {
             //todo third create when create retrofit connect
             retrofitBuilder().deletePerson(this@RemoteAddActivity.key!!)
-                .enqueue(object : Callback<ResponseBody> {
-                    override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                .enqueue(object : Callback<Unit> {
+                    override fun onFailure(call: Call<Unit>, t: Throwable) {
                         Log.i(TAG, t.message)
                     }
 
-                    override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                    override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
                         Log.i(TAG, response.message())
                         finish()
                     }
