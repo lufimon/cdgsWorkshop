@@ -50,7 +50,6 @@ class LocalActivity : AppCompatActivity() {
 
         //define after create input from success
         localAdapter = LocalAdapter()
-        localAdapter.setDataList(arrayListOf())
 
         //define after create adapter success
         recyclerView = findViewById(R.id.rv_person_detail)
@@ -64,9 +63,10 @@ class LocalActivity : AppCompatActivity() {
         DoAsyncCallBack({
             AppDatabase.getAppDatabase(this).personDao().getPersonAll()
         }, {
-            localAdapter.setDataList(it as List<Person>)
-            localAdapter.notifyDataSetChanged()
-            recyclerView.adapter = localAdapter
+            recyclerView.adapter = localAdapter.apply {
+                dataList = it as List<Person>
+                notifyDataSetChanged()
+            }
         }).execute()
     }
 }

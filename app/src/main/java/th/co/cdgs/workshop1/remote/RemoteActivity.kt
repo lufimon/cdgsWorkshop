@@ -68,7 +68,6 @@ class RemoteActivity : AppCompatActivity() {
 
         //define after create input from success
         remoteAdapter = RemoteAdapter()
-        remoteAdapter.setDataList(mutableMapOf())
 
         //define after create adapter success
         recyclerView = findViewById(R.id.rv_person_detail)
@@ -89,9 +88,10 @@ class RemoteActivity : AppCompatActivity() {
             ) {
                 Log.i(TAG, response.message())
                 response.body().run {
-                    remoteAdapter.setDataList(this)
-                    remoteAdapter.notifyDataSetChanged()
-                    recyclerView.adapter = remoteAdapter
+                    recyclerView.adapter = remoteAdapter.apply {
+                        dataList = this@run
+                        notifyDataSetChanged()
+                    }
                 }
             }
 

@@ -14,11 +14,7 @@ import th.co.cdgs.workshop1.local.data.Person
 class RemoteAdapter : /* two add implement abstract recycleview adapter and three implement funtion */
     RecyclerView.Adapter<RemoteAdapter.ViewHolder>() {
 
-    private var dataList: Map<String, Person>? = null
-
-    fun setDataList(dataList: Map<String, Person>?) {
-        this.dataList = dataList
-    }
+    var dataList: Map<String, Person>? = null
 
     //define view item for create view
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

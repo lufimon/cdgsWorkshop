@@ -14,11 +14,7 @@ import th.co.cdgs.workshop1.local.data.Person
 class LocalAdapter : /* two add implement abstract recycleview adapter and three implement funtion */
     RecyclerView.Adapter<LocalAdapter.ViewHolder>() {
 
-    private lateinit var dataList: List<Person>
-
-    fun setDataList(dataList: List<Person>) {
-        this.dataList = dataList
-    }
+    var dataList: List<Person> = arrayListOf()
 
     //define view item for create view
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
